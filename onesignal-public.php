@@ -98,6 +98,7 @@ class OneSignal_Public {
       } else {
         $current_plugin_url = ONESIGNAL_PLUGIN_URL;
       }
+      
       OneSignal_Public::insert_onesignal_stamp();
       OneSignal_Public::insert_onesignal_header_manifest($onesignal_wp_settings, $current_plugin_url);
     }
@@ -173,7 +174,8 @@ class OneSignal_Public {
           echo "oneSignal_options['subdomainName'] = \"" . $onesignal_wp_settings["subdomain"] . "\";\n";
         }
         else {
-          echo "oneSignal_options['path'] = \"" . $current_plugin_url . "sdk_files/\";\n";
+          $onesignal_path = apply_filters( 'onesignal_path', $current_plugin_url . "sdk_files/");
+          echo "oneSignal_options['path'] = \"" . $onesignal_path. "\";\n";
         }
 
         if (@$onesignal_wp_settings["safari_web_id"]) {
